@@ -1,0 +1,5 @@
+[default]
+gas_reports = ["*"]
+
+optimizer = true                                              # enable or disable the solc optimizer
+optimizer_runs = 2000
