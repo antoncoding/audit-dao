@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0;
 
-import {AuditNFT} from "../AuditNFT.sol";
+import {AuditNFT} from "../../AuditNFT.sol";
 
 import {DSTest} from "ds-test/test.sol";
-import {Utilities} from "./utils/Utilities.sol";
-import {console} from "./utils/Console.sol";
+import {Utilities} from "../utils/Utilities.sol";
+import {console} from "../utils/Console.sol";
 import {Vm} from "forge-std/Vm.sol";
 
 contract TestAuditNFTBasics is DSTest {
