@@ -15,7 +15,7 @@ contract AuditNFT is ERC1155, Ownable {
         return string(abi.encodePacked(host, _id.toString()));
     }
 
-    /// @dev set the host of uri.
+    /// @dev set the host of uri. This is only used to by the uri function
     function setHost(string memory _host) external onlyOwner {
         host = _host;
     }

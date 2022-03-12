@@ -11,7 +11,7 @@ import {Vm} from "forge-std/Vm.sol";
 contract TestAuditNFTBasics is DSTest {
     Vm internal immutable vm = Vm(HEVM_ADDRESS);
 
-    AuditNFT nft;
+    AuditNFT private nft;
 
     Utilities internal utils;
     address payable[] internal users;
@@ -27,15 +27,18 @@ contract TestAuditNFTBasics is DSTest {
     }
 
     function testSetHost() public {
-        string memory newHost = "test";
+        string memory newHost = "https://ourtokeninfo/";
         nft.setHost(newHost);
 
         string memory hostAfter = nft.host();
         assertEq(newHost, hostAfter);
+
+        string memory uri = nft.uri(1);
+        assertEq(uri, "https://ourtokeninfo/1");
     }
 
     function testFailNonOwnerSetHost() public {
         vm.prank(users[1]);
-        nft.setHost("test");
+        nft.setHost("https://malicious/");
     }
 }
