@@ -40,16 +40,13 @@ contract TestAuditNFTBasics is DSTest {
         });
         uint256 id = slot.toTokenId();
         uint256 balanceBefore = nft.balanceOf(address(this), id);
-
         assertEq(balanceBefore, 0);
 
         nft.mintAuditToken(slot, "0x00");
-
         uint256 balanceAfter = nft.balanceOf(address(this), id);
         assertEq(balanceAfter, 10);
 
-        // if owner trying to increase the supply for a existing token, it will revert
-
+        // reverts if the owner tries to increase the supply for an existing token
         vm.expectRevert(abi.encodeWithSelector(TokenAlreadyExist.selector));
         nft.mintAuditToken(slot, "0x00");
     }
@@ -74,7 +71,7 @@ contract TestAuditNFTBasics is DSTest {
         uint256,
         uint256,
         bytes calldata
-    ) external returns (bytes4) {
+    ) external pure returns (bytes4) {
         return this.onERC1155Received.selector;
     }
 }

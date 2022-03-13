@@ -14,23 +14,15 @@ contract TestAuditLibrary is DSTest {
 
     Vm internal immutable vm = Vm(HEVM_ADDRESS);
 
-    AuditNFT private nft;
-
     Utilities internal utils;
-    address payable[] internal users;
-
-    constructor() {
-        nft = new AuditNFT();
-    }
 
     function setUp() public {
         utils = new Utilities();
-        users = utils.createUsers(5);
     }
 
+    /// @dev fuzz test that we can generate tokenId from an audit struct, and also parse the property from the id.
     function testFuzzTokenId(AuditLibrary.AuditSlot memory slot) public {
         uint256 id = slot.toTokenId();
-        emit log_uint(id);
         AuditLibrary.AuditSlot memory parsed = AuditLibrary.parseTokenId(id);
         assertEq(slot.auditFirmId, parsed.auditFirmId);
         assertEq(slot.nonuce, parsed.nonuce);
